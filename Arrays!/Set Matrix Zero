@@ -1,0 +1,64 @@
+// Given a matrix if an element in the matrix is 0 then you will have to set its entire column and row to 0 and then return the matrix.
+
+import java.util.*;
+
+public class SetMatrixZeroes {
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter No of rows: ");
+        int n = sc.nextInt();
+        System.out.println("Enter No of Columns: ");
+        int m = sc.nextInt();
+        int[][] matrix = new int[n][m];
+        // take user input
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                System.out.print("Element at [" + i + "][" + j + "]: ");
+                matrix[i][j] = sc.nextInt();
+            }
+        } // display matrix
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                System.out.print(matrix[i][j] + " ");
+            }
+            System.out.println();
+        }
+
+        HashSet<Integer> row = new HashSet<>();
+        HashSet<Integer> col = new HashSet<>();
+        // get the row & column where it becomes 0
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                if (matrix[i][j] == 0) {
+                    row.add(i);
+                    col.add(j);
+                }
+            }
+        }
+        // Set rows to 0
+        for (int num : row) {
+            for (int j = 0; j < m; j++) { // loop over columns
+                matrix[num][j] = 0;
+            }
+        }
+
+        // Set columns to 0
+        for (int num : col) {
+            for (int i = 0; i < n; i++) { // loop over rows
+                matrix[i][num] = 0;
+            }
+
+        }
+        System.out.println("Afetr Setting Matrix Zero...");
+        System.out.println();
+        // display matrix
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                System.out.print(matrix[i][j] + " ");
+            }
+            System.out.println();
+        }
+
+    }
+}
