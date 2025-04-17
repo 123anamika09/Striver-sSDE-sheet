@@ -1,0 +1,39 @@
+
+// Print entire pascal's triangle
+import java.util.*;
+
+public class PascalsTriangle3 {
+    // use variation 2 to solve this
+    // n row - n time row generated = o(n^2)
+    // return list
+    public static List<List<Integer>> pascalTriangle(int n) {
+        List<List<Integer>> ans = new ArrayList<>();
+
+        for (int row = 1; row <= n; row++) {
+            List<Integer> ansRow = new ArrayList<>();
+            long value = 1;
+            ansRow.add(1); // First element is always 1
+
+            for (int col = 1; col < row; col++) {
+                value = value * (row - col);
+                value = value / col;
+                ansRow.add((int) value);
+            }
+
+            ans.add(ansRow);
+        }
+
+        return ans;
+    }
+
+    public static void main(String[] args) {
+        int n = 5;
+        List<List<Integer>> ans = pascalTriangle(n);
+        for (List<Integer> row : ans) {
+            for (int ele : row) {
+                System.out.print(ele + " ");
+            }
+            System.out.println();
+        }
+    }
+}
