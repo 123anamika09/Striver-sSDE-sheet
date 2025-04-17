@@ -1,0 +1,26 @@
+
+// Variation 1 - we are given the row number r and the column number c, and we need to find out the element at position (r,c). 
+import java.util.*;
+
+public class PascalsTriangle {
+    // One of the Naive approaches is to generate the entire Pascal triangle and
+    // then find the element at position (r,c)
+
+    // got to short notes + copy
+    public static long helper(int n, int r) {
+        long res = 1;
+        for (int i = 0; i < r; i++) {
+            res = res * (n - i);
+            res = res * (i + 1);
+        }
+        return res;
+    }
+
+    public static void main(String[] args) {
+        int r = 6;
+        int c = 3;
+        int element = (int) helper(r - 1, c - 1);
+        System.out.println(element);
+
+    }
+}
