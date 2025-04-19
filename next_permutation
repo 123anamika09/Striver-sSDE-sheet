@@ -1,0 +1,55 @@
+import java.util.*;
+
+public class next_permutation {
+    public static void helper(ArrayList<Integer> a, ArrayList<ArrayList<Integer>> ans, ArrayList<Integer> empty) {
+        int n = a.size();
+        if (a.size() == 0) // empty me combination bnn chuka hoga tb ans me add empty
+        {
+            ans.add(empty);
+        }
+        for (int i = 0; i < n; i++) {
+
+            ArrayList<Integer> aCopy = new ArrayList<>(a); // copy of a b'cause when we remove 1 from a then we have to
+                                                           // again get 1,2,3,4 for next combination so we make copy
+            ArrayList<Integer> emptyCopy = new ArrayList<>(empty); // next tym empty me 2 aana chahiye
+            emptyCopy.add(a.get(i)); // to get the value in arrayList
+            aCopy.remove(i);
+            helper(aCopy, ans, emptyCopy); // a k under 2,3,4 ans == khali & empty k undr 1
+        }
+
+    }
+
+    public static ArrayList<ArrayList<Integer>> combination(ArrayList<Integer> a) {
+        if (a.size() == 0)
+            return new ArrayList<ArrayList<Integer>>(); // empty arrayList return of size 0
+        ArrayList<ArrayList<Integer>> ans = new ArrayList<>(); // local declare
+        helper(a, ans, new ArrayList<>()); // here a 1d araylist pss which is add to 2d arraylist ans & one empty
+                                           // arraylist is created for every Recursion
+        // a = arraylist of length n
+        // arr & arraylist - pss by refrence agr ans ko 1 fnc me change krna to wo sara
+        // fnc me change hoga
+        return ans;
+
+    }
+
+    public static void main(String[] args) {
+        ArrayList<Integer> a = new ArrayList<>();
+
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter Size of array");
+        int n = sc.nextInt();
+        int[] arr = new int[n];
+        System.out.println("enter Array Element");
+        for (int i = 0; i < n; i++) {
+            arr[i] = sc.nextInt();
+        }
+        // to convert arr into arrayList
+        for (int i = 0; i < n; i++) {
+            a.add(arr[i]);
+        }
+        ArrayList<ArrayList<Integer>> finalAns = combination(a);
+        for (ArrayList<Integer> num : finalAns) {
+            System.out.println(num);
+        }
+    }
+}
